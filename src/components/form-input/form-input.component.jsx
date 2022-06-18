@@ -45,7 +45,7 @@ const FormInputLabel = styled.label`
   ${({ shrink }) => shrink && shrinkLabelStyles}
 `;
 
-export const Input = styled.input`
+const Input = styled.input`
   background: none;
   background-color: rgb(250, 250, 250);
   color: ${mainColor};
@@ -66,7 +66,7 @@ export const Input = styled.input`
   }
 `;
 
-export const Group = styled.div`
+const Group = styled.div`
   position: relative;
   margin: 20px 0;
 
