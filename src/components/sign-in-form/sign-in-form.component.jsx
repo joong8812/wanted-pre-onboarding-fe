@@ -1,21 +1,24 @@
 import React, { useRef, useState } from 'react';
 
 import FormInput from '../form-input/form-input.component';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+
+import {
+  emailValidationCheck,
+  passwordValidationCheck,
+  checkUserEmailAndPw,
+} from '../../utils/validation/validation';
 
 const defaultFormFields = {
   email: '',
   password: '',
 };
 
-let loginUserInfo = {
-  email: '',
-  isLogin: false,
-};
-
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPwValid, setIsPwValid] = useState(false);
   const { email, password } = formFields;
 
   const emailRef = useRef();
@@ -27,17 +30,29 @@ const SignInForm = () => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value });
+
+    switch (name) {
+      case 'email':
+        setIsEmailValid(emailValidationCheck(value));
+        break;
+      case 'password':
+        setIsPwValid(passwordValidationCheck(value));
+        break;
+    }
   };
 
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = async (event) => {
     event.preventDefault();
 
-    // email validation
-    // password validation
     // check user email & password
+    const checkUserResult = await checkUserEmailAndPw(email, password);
 
-    loginUserInfo = { email, isLogin: true };
-    localStorage.setItem('loginUser', JSON.stringify(loginUserInfo));
+    if (!checkUserResult.result) {
+      alert(checkUserResult.message);
+      return;
+    }
+
+    localStorage.setItem('loginUser', JSON.stringify({ email: email }));
     navigate('main');
   };
 
@@ -46,11 +61,12 @@ const SignInForm = () => {
       <form onSubmit={formSubmitHandler}>
         <FormInput
           label="Email"
-          type="email"
+          type="text"
           name="email"
           value={email}
           ref={emailRef}
           onChange={formFieldsChangeHandler}
+          valid={isEmailValid}
           required
         />
         <FormInput
@@ -60,16 +76,27 @@ const SignInForm = () => {
           ref={passwordRef}
           value={password}
           onChange={formFieldsChangeHandler}
-          required
           autoComplete="false"
+          valid={isPwValid}
+          required
         />
-        <SignInButton type="submit">로그인</SignInButton>
+        <SignInButton type="submit" disabled={!isEmailValid || !isPwValid}>
+          로그인
+        </SignInButton>
       </form>
     </div>
   );
 };
 
 export default SignInForm;
+
+const disabledButtonCss = css`
+  opacity: 0.5;
+`;
+
+const enabledButtonCss = css`
+  cursor: pointer;
+`;
 
 const SignInButton = styled.button`
   width: 100%;
@@ -78,7 +105,7 @@ const SignInButton = styled.button`
   background-color: rgb(0, 149, 246);
   border-radius: 4px;
   margin-bottom: 1rem;
-  cursor: pointer;
   color: white;
   font-size: 14px;
+  ${({ disabled }) => (disabled ? disabledButtonCss : enabledButtonCss)}
 `;

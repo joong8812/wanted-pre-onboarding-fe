@@ -4,9 +4,16 @@ import styled, { css } from 'styled-components';
 
 const FormInput = ({ label, ...otherProps }, ref) => {
   const inputValueLength = otherProps.value.length;
+  const valid = otherProps.valid || inputValueLength === 0;
+
   return (
     <Group>
-      <Input {...otherProps} shrink={inputValueLength} ref={ref} />
+      <Input
+        {...otherProps}
+        shrink={inputValueLength}
+        ref={ref}
+        valid={valid}
+      />
       {label && (
         <FormInputLabel shrink={inputValueLength}>{label}</FormInputLabel>
       )}
@@ -54,7 +61,7 @@ const Input = styled.input`
   padding: 9px 0px 7px 8px;
   display: block;
   width: 100%;
-  border: 1px solid ${subColor};
+  border: 1px solid ${({ valid }) => (valid ? subColor : 'red')};
   border-radius: 2px;
   margin: 1rem 0;
 
