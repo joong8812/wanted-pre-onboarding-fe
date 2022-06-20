@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import IconGroup from './icon-group.component';
 
 import styled, { css } from 'styled-components';
-import { FaRegHeart, FaRegCompass } from 'react-icons/fa';
 
 const Navigation = () => {
   return (
@@ -14,17 +14,9 @@ const Navigation = () => {
         <SearchContainer>
           <SearchInput type="text" placeholder="Search" />
         </SearchContainer>
-        <ButtonsContainer>
-          <IconWrap>
-            <CompassIcon />
-          </IconWrap>
-          <IconWrap>
-            <HeartIcon />
-          </IconWrap>
-          <LogoutWrap>
-            <LogoutButton>Logout</LogoutButton>
-          </LogoutWrap>
-        </ButtonsContainer>
+        <IconsContainer>
+          <IconGroup />
+        </IconsContainer>
       </NavigationContainer>
       <Outlet />
     </>
@@ -81,32 +73,8 @@ const SearchInput = styled.input`
   border-radius: 2px;
 `;
 
-const ButtonsContainer = styled.div`
+const IconsContainer = styled.div`
   display: flex;
   justify-content: right;
   ${navChildrenCommon};
-`;
-const IconWrap = styled.span`
-  padding: 8px 0;
-  cursor: pointer;
-`;
-
-const iconCommon = css`
-  width: 40px;
-  font-size: 20px;
-`;
-const HeartIcon = styled(FaRegHeart)`
-  ${iconCommon}
-`;
-const CompassIcon = styled(FaRegCompass)`
-  ${iconCommon}
-`;
-
-const LogoutWrap = styled.div`
-  padding: 8px 0;
-`;
-const LogoutButton = styled.button`
-  background-color: white;
-  font-size: 16px;
-  cursor: pointer;
 `;
