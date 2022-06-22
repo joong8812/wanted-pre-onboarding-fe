@@ -1,5 +1,8 @@
 # :: 원티드 프리온보딩 프론트엔드 코스 사전과제
 
+<details>
+<summary>사전과제 안내</summary>
+  
 ## Quick Overview
 
 ```
@@ -91,3 +94,37 @@ npm start
 ## 참고 이미지
 
 [참고 이미지 링크](https://bclef25.notion.site/1ed6d5b2192b45eeb4104a67f6a77250)
+</details>
+
+
+
+## Assignment1 & 3 - Login & Validation
+<img width="650" alt="Screen Shot 2022-06-22 at 9 59 41 PM" src="https://user-images.githubusercontent.com/18342765/175035061-d01833b6-7c38-42c1-a8fc-ec4348167c51.png">
+
+* 로그인 컴포넌트 개발 (email, password 입력 / 로그인 버튼)
+* 로그인 버튼 기본적으로 비활성화 <-> 이메일, 패스워드 유효성 통과시 활성화
+* 이메일, 패스워드 입력 때마다 유효성 검사하여 통과 못한 경우 입력 border를 빨간색으로 표현
+* 저장된 유저정보와 입력된 email, password 일치 여부 확인 (저장된 유저정보는 pulibc/data/user.json에 있음)
+* 입력된 email, password 일치 시, 유저의 이메일, 이름 정보 local storage에 저장 (key: loginUser)
+* 이후 main페이지로 이동 (react-router-dom useNavigate 사용)
+
+## Assignment2 - GNB
+<img width="1044" alt="Screen Shot 2022-06-22 at 10 11 03 PM" src="https://user-images.githubusercontent.com/18342765/175037262-fca8b38f-5b43-443d-832b-472367853147.png">
+<img width="512" alt="Screen Shot 2022-06-22 at 10 16 01 PM" src="https://user-images.githubusercontent.com/18342765/175038268-c5e70fd8-9f72-44eb-9106-7984673d1b42.png">
+
+* 메인페이지 GNB 구현
+* 모바일 사이즈(640px이하)의 경우 search 창 사라지게 함
+* 스크롤 관계없이 화면 상단에 네비게이션 바 고정 함
+
+## Assignment4 - Routing
+* 로그아웃 시, local storage에 저장된 유저 정보 삭제 (key: loginUser)
+* 로그인, 로그아웃 페이지 이동 (react-router-dom useNavigate 사용)
+
+## Assignment5 - Feeds
+<img width="1176" alt="Screen Shot 2022-06-22 at 10 29 48 PM" src="https://user-images.githubusercontent.com/18342765/175041149-8dd18347-d5aa-4981-829d-83f46f1a422c.png">
+
+* 저장된 피드 데이터를 불러와 화면에 보여줌 (저장된 피드 데이터(3개)는 public/data/feed.json에 있음)
+* 댓글 엔터 & 클릭으로 등록 가능하도록 구현
+* 댓글 등록 후 입력창 초기화 됨
+* 피드는 중앙에 위치하도록 함 (모바일 대응 됨)
+* 피드 이미지 각각 다른 사이즈로 불러오도록 함
