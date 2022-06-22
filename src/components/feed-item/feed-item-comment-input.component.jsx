@@ -17,7 +17,6 @@ const FeedItemCommentInput = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(commentRef.current.value);
     props.commentSubmit(commentRef.current.value);
     setCommentValue('');
   };

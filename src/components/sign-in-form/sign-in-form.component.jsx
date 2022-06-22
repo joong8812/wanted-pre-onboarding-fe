@@ -1,5 +1,8 @@
 import React, { useRef, useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth';
+
 import FormInput from '../form-input/form-input.component';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -25,6 +28,8 @@ const SignInForm = () => {
   const passwordRef = useRef();
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const formFieldsChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -52,7 +57,12 @@ const SignInForm = () => {
       return;
     }
 
-    localStorage.setItem('loginUser', JSON.stringify({ email: email }));
+    const { name } = checkUserResult.user;
+    localStorage.setItem(
+      'loginUser',
+      JSON.stringify({ email: email, name: name })
+    );
+    dispatch(authActions.login(checkUserResult.user));
     navigate('main');
   };
 

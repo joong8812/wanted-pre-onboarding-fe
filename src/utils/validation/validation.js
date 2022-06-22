@@ -28,7 +28,7 @@ export const checkUserEmailAndPw = async (email, password) => {
     if (targetUser.password !== password) return resultData;
 
     // pass
-    return { ...resultData, result: true, message: '' };
+    return { user: targetUser, result: true, message: '' };
   } catch (error) {
     console.log(error);
     return {

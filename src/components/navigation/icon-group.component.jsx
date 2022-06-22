@@ -1,14 +1,19 @@
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth';
+
 import styled, { css } from 'styled-components';
 import { FaRegHeart, FaRegCompass } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const IconGroup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const logoutHandler = () => {
     localStorage.removeItem('loginUser');
+    dispatch(authActions.logout());
     navigate('/');
   };
 

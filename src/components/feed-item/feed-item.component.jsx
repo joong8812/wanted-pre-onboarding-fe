@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import FeedItemHead from './feed-item-head.component';
 import FeedItemIcons from './feed-item-icons.component';
 import FeedItemCommentInput from './feed-item-comment-input.component';
@@ -9,6 +11,8 @@ import styled from 'styled-components';
 const FeedItem = ({ feed }) => {
   const { writer, imageUrl, likeCount } = feed;
   const [commentList, setCommentList] = useState([]);
+
+  const currUser = useSelector((state) => state.auth.user);
 
   const commentSubmit = (comment) => {
     setCommentList([...commentList, comment]);
@@ -26,11 +30,14 @@ const FeedItem = ({ feed }) => {
       </LikeContainer>
       <CommentContainer>
         <CommentDisplayArea>
-          {commentList.map((comment, idx) => (
-            <>
-              <p key={idx}>{comment}</p>
-            </>
-          ))}
+          <ul>
+            {commentList.map((comment, idx) => (
+              <CommentRow key={idx}>
+                <UserName>{currUser.name}</UserName>&nbsp;&nbsp;
+                <Comment>{comment}</Comment>
+              </CommentRow>
+            ))}
+          </ul>
         </CommentDisplayArea>
         <CommentInputArea>
           <FeedItemCommentInput commentSubmit={commentSubmit} />
@@ -75,4 +82,16 @@ const CommentDisplayArea = styled.div`
 
 const CommentInputArea = styled.div`
   display: 100%;
+`;
+
+const CommentRow = styled.li`
+  margin-bottom: 8px;
+`;
+
+const UserName = styled.span`
+  font-weight: 900;
+`;
+
+const Comment = styled.span`
+  font-size: 14px;
 `;
