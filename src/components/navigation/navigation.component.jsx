@@ -29,6 +29,10 @@ const navChildrenCommon = css`
   padding: 18px 25px;
   width: 100%;
   z-index: 5;
+
+  @media (max-width: 640px) {
+    padding: 18px 0px;
+  }
 `;
 
 const NavigationContainer = styled.nav`

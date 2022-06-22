@@ -1,0 +1,22 @@
+{
+  "feeds": [
+    {
+      "id": 1,
+      "writer": "Wanted",
+      "imageUrl": "https://source.unsplash.com/random/600x500",
+      "likeCount": 2
+    },
+    {
+      "id": 2,
+      "writer": "Preonboarding",
+      "imageUrl": "https://source.unsplash.com/random/900x500",
+      "likeCount": 14
+    },
+    {
+      "id": 3,
+      "writer": "Frontend",
+      "imageUrl": "https://source.unsplash.com/random/700x1080",
+      "likeCount": 63
+    }
+  ]
+}
