@@ -10,16 +10,21 @@ import styled from 'styled-components';
 const FeedItem = ({ feed }) => {
   const { writer, imageUrl, likeCount } = feed;
   const [commentList, setCommentList] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const commentSubmit = (comment) => {
     setCommentList([...commentList, comment]);
   };
 
   return (
-    <FeedItemContainer>
+    <FeedItemContainer isLoaded={isLoaded}>
       <FeedItemHead writer={writer} />
       <ImageContainer>
-        <Image src={imageUrl} alt="feedimage" />
+        <Image
+          src={imageUrl}
+          alt="feedimage"
+          onLoad={() => setIsLoaded(true)}
+        />
       </ImageContainer>
       <FeedItemIcons />
       <LikeContainer>
@@ -44,6 +49,7 @@ const FeedItemContainer = styled.article`
   border: 1px solid rgb(219, 219, 219);
   border-radius: 8px;
   margin-bottom: 1rem;
+  display: ${({ isLoaded }) => (isLoaded ? 'block' : 'none')};
 `;
 
 const ImageContainer = styled.div``;
